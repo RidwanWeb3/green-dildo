@@ -40,9 +40,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CA = "comingsoon";
-const CHART_URL = "https://radardex.pro";
-const X_URL = "https://x.com";
+const CA = "0x56cdc8278aa5821bddc1f88c86a569d7f3458c98";
+const CHART_URL = "https://radardex.pro/#0x56cdc8278aA5821bDDc1F88C86a569d7F3458C98";
+const X_URL = "https://x.com/greendildoarc";
 
 const CREW = [
   { src: heroAsset, name: "The Green One", line: "Default state: printing." },
