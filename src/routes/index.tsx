@@ -14,8 +14,9 @@ import meme3Asset from "@/assets/meme-3.png";
 import meme4Asset from "@/assets/meme-4.png";
 import meme5Asset from "@/assets/meme-5.png";
 import meme6Asset from "@/assets/meme-6.png";
+import dildogateVideo from "@/assets/dildogate.mp4";
 
-const videoAsset = "/__l5e/assets-v1/cbe8fae7-09dc-4812-85f0-f0c39a496a81/dildogate.mp4";
+const videoAsset = dildogateVideo;
 
 export const Route = createFileRoute("/")({
   head: () => ({
