@@ -10,6 +10,10 @@ import rocketAsset from "@/assets/c-rocket.png.asset.json";
 import glyphAsset from "@/assets/logo-glyph.png.asset.json";
 import meme1Asset from "@/assets/meme-1.png.asset.json";
 import meme2Asset from "@/assets/meme-2.png.asset.json";
+import meme3Asset from "@/assets/meme-3.png.asset.json";
+import meme4Asset from "@/assets/meme-4.png.asset.json";
+import meme5Asset from "@/assets/meme-5.png.asset.json";
+import meme6Asset from "@/assets/meme-6.png.asset.json";
 import videoAsset from "@/assets/dildogate.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -56,6 +60,10 @@ const CREW = [
 const MEMES = [
   { src: meme1Asset.url, title: "THE GREEN ONE" },
   { src: meme2Asset.url, title: "AND THEN IT HAPPENED" },
+  { src: meme3Asset.url, title: "STILL HOLDING" },
+  { src: meme4Asset.url, title: "SEE YOU IN THE TRENCHES" },
+  { src: meme5Asset.url, title: "GREEN CANDLES ONLY" },
+  { src: meme6Asset.url, title: "GO GREEN OR GO HOME" },
 ];
 
 function Marquee() {
