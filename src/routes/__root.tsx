@@ -77,21 +77,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Green Dildo Coin — $DILDO" },
+      {
+        name: "description",
+        content:
+          "A meme, a coin, and a green candle that refused to sit down. $DILDO — go green or go home.",
+      },
+      { property: "og:site_name", content: "Green Dildo Coin" },
+      { property: "og:title", content: "Green Dildo Coin — $DILDO" },
+      {
+        property: "og:description",
+        content: "A meme, a coin, and a green candle that refused to sit down.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "theme-color", content: "#00090b" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
