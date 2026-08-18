@@ -374,7 +374,7 @@ function Index() {
 
         {/* MEMES */}
         <Section id="memes" eyebrow="Free ammo" title="The Meme Vault">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {MEMES.map((m) => (
               <figure key={m.title} className="pixel-box bg-panel p-4">
                 <img src={m.src} alt={m.title} className="w-full [image-rendering:pixelated]" />
