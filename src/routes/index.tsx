@@ -23,30 +23,24 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "$DILDO: the green candle with sunglasses. Chart, memes, tokenomics and the tape — go green or go home.",
+          "$DILDO: the green candle with sunglasses. The tape, the chart, the memes and the tokenomics — go green or go home.",
       },
       { property: "og:title", content: "Green Dildo Coin — $DILDO" },
       {
         property: "og:description",
-        content: "The green candle with sunglasses. Memes, tape and tokenomics.",
+        content: "The green candle with sunglasses. The tape, the chart and the memes.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
 
-const CA = "So1anaDiLd0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-
-const NAV = [
-  { href: "#tape", label: "The tape" },
-  { href: "#story", label: "The story" },
-  { href: "#armory", label: "Armory" },
-  { href: "#tokenomics", label: "Tokenomics" },
-  { href: "#memes", label: "Meme vault" },
-  { href: "#community", label: "Community" },
-];
+const CA = "comingsoon";
+const CHART_URL = "https://radardex.pro";
+const X_URL = "https://x.com";
 
 const CREW = [
   { src: heroAsset.url, name: "The Green One", line: "Default state: printing." },
@@ -64,6 +58,13 @@ const MEMES = [
   { src: meme4Asset.url, title: "SEE YOU IN THE TRENCHES" },
   { src: meme5Asset.url, title: "GREEN CANDLES ONLY" },
   { src: meme6Asset.url, title: "GO GREEN OR GO HOME" },
+];
+
+const QUOTES = [
+  "It was never about the object. It was about the culture around it.",
+  "Memes are the gateway drug to crypto.",
+  "The joke is the distribution. The distribution was always the point.",
+  "We launched a coin and the timeline did the marketing for free.",
 ];
 
 function Marquee() {
@@ -157,6 +158,78 @@ function Section({
   );
 }
 
+function Sticker({
+  text,
+  tone = "gold",
+  className = "",
+}: {
+  text: string;
+  tone?: "gold" | "lime" | "blood" | "bone";
+  className?: string;
+}) {
+  const tones = {
+    gold: "bg-gold text-black",
+    lime: "bg-lime text-black",
+    blood: "bg-blood text-bone",
+    bone: "bg-bone text-black",
+  } as const;
+  return (
+    <span
+      className={`pixel-box font-display px-3 py-1 text-xs tracking-widest uppercase ${tones[tone]} ${className}`}
+    >
+      {text}
+    </span>
+  );
+}
+
+function HeroChart() {
+  const bars = [
+    [54, 1],
+    [70, 0],
+    [62, 1],
+    [50, 1],
+    [58, 0],
+    [66, 0],
+    [74, 1],
+    [60, 1],
+    [999, 1],
+    [68, 1],
+    [52, 1],
+    [72, 0],
+    [58, 1],
+    [64, 0],
+    [48, 1],
+    [56, 0],
+    [66, 1],
+    [44, 0],
+  ] as const;
+  return (
+    <div className="relative">
+      <div className="flex items-end justify-center gap-2 md:gap-3">
+        {bars.map(([h, up], i) => {
+          const big = h === 999;
+          return (
+            <div
+              key={i}
+              className={`w-3 border-2 border-black md:w-6 ${
+                big ? "bg-lime shadow-[0_0_40px_rgba(140,255,110,0.5)]" : up ? "bg-lime-deep" : "bg-blood"
+              }`}
+              style={{ height: big ? "320px" : `${h * 2.2}px` }}
+            />
+          );
+        })}
+      </div>
+      <img
+        src={glyphAsset.url}
+        alt="$DILDO mascot riding the green candle"
+        className="pointer-events-none absolute top-[38%] left-1/2 w-10 -translate-x-1/2 md:w-14 [image-rendering:pixelated]"
+      />
+      <Sticker text="Programmed" tone="blood" className="absolute top-6 left-0 -rotate-6" />
+      <Sticker text="We made a trend" tone="bone" className="absolute right-0 bottom-16 rotate-3" />
+    </div>
+  );
+}
+
 function Index() {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -171,28 +244,51 @@ function Index() {
       <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(ellipse_80%_65%_at_50%_45%,transparent_45%,rgba(0,0,0,0.8)_100%)]" />
 
       <header className="sticky top-0 z-50 border-b-4 border-black bg-deep/90 backdrop-blur">
-        <div className="mx-auto flex w-[92vw] max-w-6xl items-center justify-between gap-4 py-3">
-          <a href="#top" className="flex items-center gap-3">
-            <img src={glyphAsset.url} alt="$DILDO pixel mascot" className="h-9 [image-rendering:pixelated]" />
-            <span className="font-display text-2xl text-lime">$DILDO</span>
-          </a>
-          <nav className="hidden gap-6 lg:flex">
-            {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="font-display text-sm tracking-widest text-dim uppercase transition-colors hover:text-lime"
-              >
-                {n.label}
-              </a>
-            ))}
+        <div className="mx-auto flex w-[92vw] max-w-6xl flex-wrap items-center justify-between gap-3 py-3">
+          <div className="flex items-center gap-3">
+            <a href="#top" className="flex items-center gap-2">
+              <img
+                src={glyphAsset.url}
+                alt="$DILDO pixel mascot"
+                className="h-8 [image-rendering:pixelated]"
+              />
+              <span className="font-display text-2xl text-lime">$DILDO</span>
+            </a>
+            <button
+              onClick={copy}
+              className="font-display text-xs tracking-widest text-dim uppercase transition-colors hover:text-lime"
+            >
+              CA <span className="text-lime">{copied ? "copied" : CA}</span>
+            </button>
+            <span className="font-display hidden items-center gap-2 text-xs tracking-widest text-dim uppercase sm:flex">
+              <span className="inline-block h-2 w-2 animate-[flicker_1.4s_ease-in-out_infinite] bg-lime" />
+              Live chart
+            </span>
+          </div>
+          <nav className="flex items-center gap-2">
+            <a
+              href="#tape"
+              className="pixel-box font-display bg-panel px-3 py-2 text-xs tracking-widest text-bone uppercase"
+            >
+              The tape
+            </a>
+            <a
+              href={X_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box font-display bg-panel px-3 py-2 text-xs tracking-widest text-bone uppercase"
+            >
+              X
+            </a>
+            <a
+              href={CHART_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box font-display bg-lime px-3 py-2 text-xs tracking-widest text-black uppercase"
+            >
+              Chart
+            </a>
           </nav>
-          <a
-            href="#buy"
-            className="pixel-box font-display bg-lime px-4 py-2 text-sm tracking-widest text-black uppercase transition-transform hover:-translate-y-0.5"
-          >
-            Buy $DILDO
-          </a>
         </div>
       </header>
 
@@ -202,120 +298,154 @@ function Index() {
           <div className="absolute inset-0 z-0">
             <Candles />
           </div>
-          <div className="relative z-10 mx-auto grid w-[92vw] max-w-6xl items-center gap-10 py-20 md:grid-cols-2 md:py-28">
-            <div>
-              <p className="font-display text-sm tracking-[0.35em] text-lime uppercase">
-                Green candle · sunglasses · no chill
-              </p>
-              <h1 className="font-display mt-3 text-6xl leading-[0.85] text-bone md:text-8xl">
-                GO GREEN
-                <br />
-                <span className="text-lime">OR GO HOME</span>
-              </h1>
-              <p className="mt-6 max-w-md font-mono-read text-dim">
-                We launched a coin, drew one absurdly long green candle, and the internet did the
-                rest. $DILDO is a meme with a chart attached.
-              </p>
-              <div id="buy" className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#tape"
-                  className="pixel-box font-display bg-lime px-6 py-3 tracking-widest text-black uppercase transition-transform hover:-translate-y-0.5"
-                >
-                  Buy now
-                </a>
-                <a
-                  href="#memes"
-                  className="pixel-box font-display bg-panel px-6 py-3 tracking-widest text-bone uppercase transition-transform hover:-translate-y-0.5"
-                >
-                  Steal the memes
-                </a>
-              </div>
-              <button
-                onClick={copy}
-                className="pixel-box mt-6 flex w-full max-w-md items-center gap-3 bg-deep px-4 py-3 text-left"
-              >
-                <span className="font-display text-xs tracking-widest text-lime uppercase">CA</span>
-                <code className="flex-1 truncate font-mono-read text-xs text-dim">{CA}</code>
-                <span className="font-display text-xs tracking-widest text-bone uppercase">
-                  {copied ? "Copied" : "Copy"}
-                </span>
-              </button>
+          <div className="relative z-10 mx-auto w-[92vw] max-w-6xl py-16 text-center md:py-24">
+            <div className="mb-6 flex justify-between">
+              <Sticker text="As seen on TV" tone="gold" className="-rotate-6" />
+              <Sticker text="Not random" tone="lime" className="rotate-6" />
             </div>
-            <div className="flex justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <h1 className="font-display text-6xl leading-none text-lime drop-shadow-[0_6px_0_#000] md:text-9xl">
+                $DILDO
+              </h1>
               <img
                 src={heroAsset.url}
                 alt="Green pixel candle mascot wearing sunglasses"
-                className="w-64 animate-[bob_3.6s_ease-in-out_infinite] md:w-80 [image-rendering:pixelated]"
+                className="w-20 animate-[bob_3.6s_ease-in-out_infinite] md:w-32 [image-rendering:pixelated]"
               />
             </div>
+            <p className="font-display mt-4 text-2xl text-bone md:text-4xl">Go Green or Go Home!</p>
+            <p className="mx-auto mt-4 max-w-xl font-mono-read text-sm text-dim">
+              One absurdly long green candle, sunglasses, and a timeline that never recovered.
+            </p>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a
+                href="#tape"
+                className="pixel-box font-display bg-lime px-6 py-3 tracking-widest text-black uppercase transition-transform hover:-translate-y-0.5"
+              >
+                ▶ Watch the tape
+              </a>
+              <a
+                href={CHART_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="pixel-box font-display bg-panel px-6 py-3 tracking-widest text-bone uppercase transition-transform hover:-translate-y-0.5"
+              >
+                View chart
+              </a>
+              <a
+                href={X_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="pixel-box font-display bg-panel px-6 py-3 tracking-widest text-bone uppercase transition-transform hover:-translate-y-0.5"
+              >
+                Follow on X
+              </a>
+            </div>
+
+            <button
+              onClick={copy}
+              className="pixel-box mx-auto mt-8 flex w-full max-w-md items-center gap-3 bg-deep px-4 py-3 text-left"
+            >
+              <span className="font-display text-xs tracking-widest text-lime uppercase">CA</span>
+              <code className="flex-1 truncate font-mono-read text-xs text-dim">{CA}</code>
+              <span className="font-display text-xs tracking-widest text-bone uppercase">
+                {copied ? "Copied" : "Copy"}
+              </span>
+            </button>
           </div>
         </section>
 
         <Marquee />
 
-        {/* TAPE */}
-        <Section id="tape" eyebrow="Live-ish" title="The tape">
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { k: "Price", v: "$0.0∞69", s: "+420.69%" },
-              { k: "Holders", v: "13,370", s: "diamond handed" },
-              { k: "Liquidity", v: "BURNED", s: "keys thrown away" },
-            ].map((c) => (
-              <div key={c.k} className="pixel-box bg-panel p-6">
-                <p className="font-display text-xs tracking-[0.3em] text-dim uppercase">{c.k}</p>
-                <p className="font-display mt-2 text-4xl text-lime">{c.v}</p>
-                <p className="mt-1 font-mono-read text-xs text-dim">{c.s}</p>
-              </div>
-            ))}
+        {/* CHART */}
+        <Section id="chart" eyebrow="The candle" title="One green candle">
+          <HeroChart />
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href={CHART_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box font-display bg-lime px-6 py-3 tracking-widest text-black uppercase"
+            >
+              Buy on RadarDex
+            </a>
+            <a
+              href={CHART_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box font-display bg-panel px-6 py-3 tracking-widest text-bone uppercase"
+            >
+              Live chart
+            </a>
           </div>
-          <div className="pixel-box mt-6 flex items-end gap-2 overflow-hidden bg-deep p-6">
-            {[26, 34, 30, 40, 28, 46, 38, 52, 44, 60, 54, 72, 66, 88, 120].map((h, i) => (
-              <div key={i} className="flex flex-1 flex-col items-center">
-                <div
-                  className={`w-full border-2 border-black ${i > 8 ? "bg-lime" : i % 3 === 0 ? "bg-blood" : "bg-lime-deep"}`}
-                  style={{ height: `${h * 1.6}px` }}
-                />
-              </div>
-            ))}
+        </Section>
+
+        {/* TAPE */}
+        <Section id="tape" eyebrow="You've seen us. You just didn't realise." title="The tape">
+          <p className="max-w-xl font-mono-read text-dim">
+            National television explaining us, to you, for free. Ad spend: zero.
+          </p>
+          <div className="pixel-box mt-8 overflow-hidden bg-black">
+            <video
+              src={videoAsset.url}
+              controls
+              playsInline
+              poster={meme2Asset.url}
+              className="h-full w-full object-cover"
+            />
           </div>
         </Section>
 
         {/* STORY */}
         <Section id="story" eyebrow="Receipts" title="What actually happened">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-5 font-mono-read text-dim">
               <p>
-                It started as a joke in a group chat: what if the greenest candle on the chart had a
-                face, sunglasses, and absolutely no self-awareness?
-              </p>
-              <p>
-                Twelve hours later the mascot was everywhere. The red candles panicked. Somebody made
-                a video. Then the timeline made it a whole thing.
+                The green one hit the floor. The broadcast stopped. Then it went everywhere, and
+                every anchor had to say the word on air with a straight face.
               </p>
               <p className="text-bone">
-                No presale. No team allocation. No roadmap written by a consultant. Just a green
-                candle that refuses to sit down.
+                They thought they were covering it. They were running it.
               </p>
               <div className="pixel-box bg-panel p-5">
                 <p className="font-display text-xs tracking-[0.3em] text-lime uppercase">
                   Don&apos;t get rugged
                 </p>
                 <ul className="mt-3 space-y-2 font-mono-read text-sm text-dim">
-                  <li>▸ One contract address. The one above. Nothing else.</li>
+                  <li>▸ One contract address. The one at the top. Nothing else.</li>
                   <li>▸ We will never DM you first.</li>
-                  <li>▸ Anyone promising an airdrop for your seed phrase is a red candle.</li>
+                  <li>▸ Our only social is X. Everything else is a red candle.</li>
                 </ul>
               </div>
             </div>
-            <div className="pixel-box overflow-hidden bg-black">
-              <video
-                src={videoAsset.url}
-                controls
-                playsInline
-                poster={meme2Asset.url}
-                className="h-full w-full object-cover"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                ["27,000%", "Peak move. Their number."],
+                ["Prime time", "And everyone who copied it."],
+                ["Multi-sport", "It would not stay in one arena."],
+                ["$0", "Media budget."],
+              ].map(([k, v]) => (
+                <div key={k} className="pixel-box bg-panel p-5">
+                  <p className="font-display text-2xl text-gold">{k}</p>
+                  <p className="mt-2 font-mono-read text-xs text-dim uppercase">{v}</p>
+                </div>
+              ))}
             </div>
+          </div>
+        </Section>
+
+        {/* WHY */}
+        <Section id="why" eyebrow="It was never about the object" title="Why we did it">
+          <div className="space-y-5">
+            {QUOTES.map((q) => (
+              <blockquote key={q} className="pixel-box bg-deep p-6 md:p-8">
+                <p className="font-mono-read text-lg text-bone md:text-2xl">&ldquo;{q}&rdquo;</p>
+                <footer className="font-display mt-4 text-xs tracking-[0.3em] text-lime uppercase">
+                  From the tape
+                </footer>
+              </blockquote>
+            ))}
           </div>
         </Section>
 
@@ -323,7 +453,10 @@ function Index() {
         <Section id="armory" eyebrow="Meet the cast" title="The Armory">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {CREW.map((c) => (
-              <div key={c.name} className="pixel-box bg-panel p-5 transition-transform hover:-translate-y-1">
+              <div
+                key={c.name}
+                className="pixel-box bg-panel p-5 transition-transform hover:-translate-y-1"
+              >
                 <div className="flex h-40 items-center justify-center bg-deep">
                   <img src={c.src} alt={c.name} className="h-36 [image-rendering:pixelated]" />
                 </div>
@@ -346,7 +479,10 @@ function Index() {
                   ["Team allocation", "None. Zero. Nihil."],
                   ["Contract", "Ownership renounced"],
                 ].map(([k, v]) => (
-                  <div key={k} className="flex items-center justify-between gap-4 border-b-2 border-black/60 pb-3">
+                  <div
+                    key={k}
+                    className="flex items-center justify-between gap-4 border-b-2 border-black/60 pb-3"
+                  >
                     <dt className="font-mono-read text-sm text-dim">{k}</dt>
                     <dd className="font-display text-xl text-lime">{v}</dd>
                   </div>
@@ -398,23 +534,27 @@ function Index() {
 
         {/* COMMUNITY */}
         <Section id="community" eyebrow="Where we live" title="Join the green">
-          <div className="grid gap-5 sm:grid-cols-3">
-            {[
-              ["Telegram", "The group chat that never sleeps.", "https://t.me"],
-              ["X", "Daily candles and zero shame.", "https://x.com"],
-              ["DexScreener", "Watch the tape in real time.", "https://dexscreener.com"],
-            ].map(([t, d, href]) => (
-              <a
-                key={t}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="pixel-box bg-panel p-6 transition-transform hover:-translate-y-1"
-              >
-                <p className="font-display text-2xl text-lime">{t}</p>
-                <p className="mt-2 font-mono-read text-sm text-dim">{d}</p>
-              </a>
-            ))}
+          <div className="grid gap-5 sm:grid-cols-2">
+            <a
+              href={X_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box bg-panel p-6 transition-transform hover:-translate-y-1"
+            >
+              <p className="font-display text-2xl text-lime">X</p>
+              <p className="mt-2 font-mono-read text-sm text-dim">
+                Our only social. Daily candles and zero shame.
+              </p>
+            </a>
+            <a
+              href={CHART_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="pixel-box bg-panel p-6 transition-transform hover:-translate-y-1"
+            >
+              <p className="font-display text-2xl text-lime">RadarDex</p>
+              <p className="mt-2 font-mono-read text-sm text-dim">Chart and buy — radardex.pro</p>
+            </a>
           </div>
         </Section>
       </main>
@@ -427,7 +567,7 @@ function Index() {
             <img src={glyphAsset.url} alt="" className="h-8 [image-rendering:pixelated]" />
             <span className="font-display text-xl text-lime">$DILDO</span>
           </div>
-          <p className="font-mono-read text-xs text-dim">
+          <p className="max-w-md font-mono-read text-xs text-dim">
             $DILDO is a meme coin with no intrinsic value or expectation of financial return. Nothing
             here is financial advice.
           </p>
