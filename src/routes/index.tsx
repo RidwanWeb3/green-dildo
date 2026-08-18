@@ -1,20 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import heroAsset from "@/assets/c-hero.png.asset.json";
-import flexAsset from "@/assets/c-flex.png.asset.json";
-import kingAsset from "@/assets/c-king.png.asset.json";
-import laserAsset from "@/assets/c-laser.png.asset.json";
-import redAsset from "@/assets/c-red.png.asset.json";
-import rocketAsset from "@/assets/c-rocket.png.asset.json";
-import glyphAsset from "@/assets/logo-glyph.png.asset.json";
-import meme1Asset from "@/assets/meme-1.png.asset.json";
-import meme2Asset from "@/assets/meme-2.png.asset.json";
-import meme3Asset from "@/assets/meme-3.png.asset.json";
-import meme4Asset from "@/assets/meme-4.png.asset.json";
-import meme5Asset from "@/assets/meme-5.png.asset.json";
-import meme6Asset from "@/assets/meme-6.png.asset.json";
-import videoAsset from "@/assets/dildogate.mp4.asset.json";
+import heroAsset from "@/assets/c-hero.png";
+import flexAsset from "@/assets/c-flex.png";
+import kingAsset from "@/assets/c-king.png";
+import laserAsset from "@/assets/c-laser.png";
+import redAsset from "@/assets/c-red.png";
+import rocketAsset from "@/assets/c-rocket.png";
+import glyphAsset from "@/assets/logo-glyph.png";
+import meme1Asset from "@/assets/meme-1.png";
+import meme2Asset from "@/assets/meme-2.png";
+import meme3Asset from "@/assets/meme-3.png";
+import meme4Asset from "@/assets/meme-4.png";
+import meme5Asset from "@/assets/meme-5.png";
+import meme6Asset from "@/assets/meme-6.png";
+
+const videoAsset = "/__l5e/assets-v1/cbe8fae7-09dc-4812-85f0-f0c39a496a81/dildogate.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -43,21 +44,21 @@ const CHART_URL = "https://radardex.pro";
 const X_URL = "https://x.com";
 
 const CREW = [
-  { src: heroAsset.url, name: "The Green One", line: "Default state: printing." },
-  { src: flexAsset.url, name: "Flex Candle", line: "Bought the dip with both arms." },
-  { src: kingAsset.url, name: "King Candle", line: "Rules the daily close." },
-  { src: laserAsset.url, name: "Laser Candle", line: "Eyes on one number only." },
-  { src: rocketAsset.url, name: "Rocket Candle", line: "Exit liquidity? Never heard of her." },
-  { src: redAsset.url, name: "The Red One", line: "Cries in 4-hour timeframe." },
+  { src: heroAsset, name: "The Green One", line: "Default state: printing." },
+  { src: flexAsset, name: "Flex Candle", line: "Bought the dip with both arms." },
+  { src: kingAsset, name: "King Candle", line: "Rules the daily close." },
+  { src: laserAsset, name: "Laser Candle", line: "Eyes on one number only." },
+  { src: rocketAsset, name: "Rocket Candle", line: "Exit liquidity? Never heard of her." },
+  { src: redAsset, name: "The Red One", line: "Cries in 4-hour timeframe." },
 ];
 
 const MEMES = [
-  { src: meme1Asset.url, title: "THE GREEN ONE" },
-  { src: meme2Asset.url, title: "AND THEN IT HAPPENED" },
-  { src: meme3Asset.url, title: "STILL HOLDING" },
-  { src: meme4Asset.url, title: "SEE YOU IN THE TRENCHES" },
-  { src: meme5Asset.url, title: "GREEN CANDLES ONLY" },
-  { src: meme6Asset.url, title: "GO GREEN OR GO HOME" },
+  { src: meme1Asset, title: "THE GREEN ONE" },
+  { src: meme2Asset, title: "AND THEN IT HAPPENED" },
+  { src: meme3Asset, title: "STILL HOLDING" },
+  { src: meme4Asset, title: "SEE YOU IN THE TRENCHES" },
+  { src: meme5Asset, title: "GREEN CANDLES ONLY" },
+  { src: meme6Asset, title: "GO GREEN OR GO HOME" },
 ];
 
 const QUOTES = [
@@ -220,7 +221,7 @@ function HeroChart() {
         })}
       </div>
       <img
-        src={glyphAsset.url}
+        src={glyphAsset}
         alt="$DILDO mascot riding the green candle"
         className="pointer-events-none absolute top-[38%] left-1/2 w-10 -translate-x-1/2 md:w-14 [image-rendering:pixelated]"
       />
@@ -248,7 +249,7 @@ function Index() {
           <div className="flex items-center gap-3">
             <a href="#top" className="flex items-center gap-2">
               <img
-                src={glyphAsset.url}
+                src={glyphAsset}
                 alt="$DILDO pixel mascot"
                 className="h-8 [image-rendering:pixelated]"
               />
@@ -308,7 +309,7 @@ function Index() {
                 $DILDO
               </h1>
               <img
-                src={heroAsset.url}
+                src={heroAsset}
                 alt="Green pixel candle mascot wearing sunglasses"
                 className="w-20 animate-[bob_3.6s_ease-in-out_infinite] md:w-32 [image-rendering:pixelated]"
               />
@@ -388,10 +389,10 @@ function Index() {
           </p>
           <div className="pixel-box mt-8 overflow-hidden bg-black">
             <video
-              src={videoAsset.url}
+              src={videoAsset}
               controls
               playsInline
-              poster={meme2Asset.url}
+              poster={meme2Asset}
               className="h-full w-full object-cover"
             />
           </div>
@@ -402,22 +403,21 @@ function Index() {
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-5 font-mono-read text-dim">
               <p>
-                The green one hit the floor. The broadcast stopped. Then it went everywhere, and
-                every anchor had to say the word on air with a straight face.
+                Neon green hit a WNBA floor. The game stopped. Then it went multi‑sport, and every
+                anchor in America had to say the word on air with a straight face.
               </p>
               <p className="text-bone">
                 They thought they were covering it. They were running it.
               </p>
-              <div className="pixel-box bg-panel p-5">
-                <p className="font-display text-xs tracking-[0.3em] text-lime uppercase">
-                  Don&apos;t get rugged
+              <blockquote className="pixel-box bg-deep p-6 md:p-8">
+                <p className="font-mono-read text-lg text-bone md:text-2xl">
+                  &ldquo;We launched a coin and we created a trend. It&apos;s extremely powerful for a
+                  small group of people to be able to go and influence the world.&rdquo;
                 </p>
-                <ul className="mt-3 space-y-2 font-mono-read text-sm text-dim">
-                  <li>▸ One contract address. The one at the top. Nothing else.</li>
-                  <li>▸ We will never DM you first.</li>
-                  <li>▸ Our only social is X. Everything else is a red candle.</li>
-                </ul>
-              </div>
+                <footer className="font-display mt-4 text-xs tracking-[0.3em] text-lime uppercase">
+                  From the tape
+                </footer>
+              </blockquote>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -564,7 +564,7 @@ function Index() {
       <footer className="relative z-10 mx-auto w-[92vw] max-w-6xl py-12">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src={glyphAsset.url} alt="" className="h-8 [image-rendering:pixelated]" />
+            <img src={glyphAsset} alt="" className="h-8 [image-rendering:pixelated]" />
             <span className="font-display text-xl text-lime">$DILDO</span>
           </div>
           <p className="max-w-md font-mono-read text-xs text-dim">
